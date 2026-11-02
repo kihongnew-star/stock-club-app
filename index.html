@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>증권투자 동호회</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="mobile-frame">
+    <!-- 상단: 최근 등록 종목 요약 티커 -->
+    <header class="top-banner">
+      <span class="badge">최근 등록</span>
+      <div id="recentStockDisplay">등록된 종목이 없습니다.</div>
+    </header>
+
+    <!-- 메인 화면 -->
+    <main id="mainView" class="view-section active">
+      <!-- 회원 등록 바 -->
+      <section class="card auth-box">
+        <input type="text" id="userNameInput" placeholder="회원명 입력 (예: 홍길동)">
+        <button id="setUserBtn">접속</button>
+      </section>
+
+      <!-- 종목 & 근거 입력 폼 -->
+      <section class="card form-box">
+        <h3>관심종목 등록</h3>
+        <input type="text" id="stockName" placeholder="종목명 (예: 삼성전자)">
+        <input type="number" id="buyPrice" placeholder="매수가 (원)">
+        <input type="number" id="currentPrice" placeholder="현재가 (원)">
+        <textarea id="stockReason" placeholder="투자 근거를 작성하세요."></textarea>
+        <button id="aiAnalyzeBtn" class="secondary-btn">AI 투자 근거 요약</button>
+        <button id="addStockBtn" class="primary-btn">종목 등록</button>
+      </section>
+
+      <!-- 수익률 정렬 필터 -->
+      <section class="filter-group">
+        <div class="filter-label">수익률 정렬</div>
+        <div class="filter-buttons">
+          <button data-sort="realtime" class="filter-btn active">실시간</button>
+          <button data-sort="daily" class="filter-btn">일간</button>
+          <button data-sort="weekly" class="filter-btn">주간</button>
+          <button data-sort="monthly" class="filter-btn">월별</button>
+          <button id="goUserStatsBtn" class="highlight-btn">입력자별 순위 보기 →</button>
+        </div>
+      </section>
+
+      <!-- 종목 리스트 -->
+      <section class="card list-box">
+        <h3>종목 목록</h3>
+        <ul id="stockList" class="stock-items"></ul>
+      </section>
+    </main>
+
+    <!-- 별도 화면: 입력자별 수익률 조회 화면 -->
+    <main id="userStatsView" class="view-section">
+      <div class="sub-header">
+        <button id="backToMainBtn" class="back-btn">← 뒤로가기</button>
+        <h2>입력자별 수익률</h2>
+      </div>
+      <section class="card">
+        <ul id="userRankingList" class="user-items"></ul>
+      </section>
+    </main>
+
+    <!-- 하단: 시장 지표 바 (KOSPI, KOSDAQ, 환율) -->
+    <footer class="market-bar">
+      <div class="ticker-item">
+        <span class="name">코스피</span>
+        <span id="kospiVal" class="val up">2,650.12</span>
+      </div>
+      <div class="ticker-item">
+        <span class="name">코스닥</span>
+        <span id="kosdaqVal" class="val down">865.40</span>
+      </div>
+      <div class="ticker-item">
+        <span class="name">원/달러</span>
+        <span id="usdVal" class="val">1,335.50</span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
