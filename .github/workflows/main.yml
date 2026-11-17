@@ -1,17 +1,18 @@
 - name: Decode release keystore
-     run: echo "${{ secrets.UPLOAD_KEYSTORE_BASE64 }}" | base64 -d > my-upload-key.jks
+  run: |
+    echo "${{ secrets.UPLOAD_KEYSTORE_BASE64 }}" | base64 -d > my-upload-key.jks
 
-   - name: Build Release APK & AAB
-     env:
-       KEYSTORE_PATH: ${{ github.workspace }}/my-upload-key.jks
-       STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
-       KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-     run: gradle :app:assembleRelease :app:bundleRelease
+- name: Build Release APK & AAB
+  env:
+    KEYSTORE_PATH: ${{ github.workspace }}/my-upload-key.jks
+    STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+    KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+  run: gradle :app:assembleRelease :app:bundleRelease
 
-   - name: Upload Release Outputs
-     uses: actions/upload-artifact@v4
-     with:
-       name: senior-med-water-release
-       path: |
-         app/build/outputs/apk/release/*.apk
-         app/build/outputs/bundle/release/*.aab
+- name: Upload Release Outputs
+  uses: actions/upload-artifact@v4
+  with:
+    name: senior-med-water-release
+    path: |
+      app/build/outputs/apk/release/*.apk
+      app/build/outputs/bundle/release/*.aab
